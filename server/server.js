@@ -11,8 +11,10 @@ app.use(express.static('server/public'));
 
 // GET & POST Routes go here
 
-let guessArray=[]; // Guess Array will hold objects representing a "set"
-                   // of guesses, with properties representing each player -JI
+let playerOneArray=[];
+let playerTwoArray=[];
+let playerThreeArray=[];
+let playerFourArray=[];
 
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
@@ -20,5 +22,8 @@ app.listen(PORT, () => {
 
 app.post('/submit', function(req, res){
   let guessSet = req.body.guessSet;
-  guessArray.push(guessSet);  
-});
+  playerOneArray.push(guessSet.playerOne); 
+  playerTwoArray.push(guessSet.playerTwo); 
+  playerThreeArray.push(guessSet.playerThree); 
+  playerFourArray.push(guessSet.playerFour);  
+}); // keep in mind that these will be ending up as strings
