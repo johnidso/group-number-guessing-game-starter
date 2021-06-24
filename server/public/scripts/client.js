@@ -2,6 +2,15 @@ $(document).ready(handleReady);
 
 function handleReady() {
   console.log("jquery is loaded!")
+  $('#submitButton').on("click", submitGuesses());
+  $('#submitButton').on("click", clearInputs());
+}
+
+function clearInputs(){
+  $('#playerOneIn').val('');
+  $('#playerTwoIn').val('');
+  $('#playerThreeIn').val('');
+  $('#playerFourIn').val('');
 }
 
 function submitGuesses(){
