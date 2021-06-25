@@ -27,7 +27,7 @@ app.post('/submit', (req, res) => {
 
 // Listen for GET requests to /answers, these are the answers to the player query
 app.get('/answers', (req, res) => {
-  res.send(playerAnswers);
+  res.send(playerAnswersPackage);
   console.log('sending answers (GET)');
 });
 
@@ -38,6 +38,7 @@ let randomNumber = getRandomNum(1, 25);
 // array to store playerAnswers, checked for correctness
 const playerAnswers= [];
 
+const playerAnswersPackage = { contents: []};
 
 // Function to loop through an object, check player answers, and push to playerAnswers array
 function checkAnswers(guessObject) {
@@ -50,6 +51,7 @@ function checkAnswers(guessObject) {
             answer: playerAnswer
         });
     }
+    playerAnswersPackage.contents = playerAnswers;
 }
 
 // Function to generate a random number between 1 and 25
