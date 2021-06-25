@@ -18,13 +18,13 @@ function submitGuesses(){
     method: 'POST',
     url: '/submit',
     data: {
-      guessSet:{
-        playerOne: $('#playerOneIn').val(),
-        playerTwo: $('#playerTwoIn').val(),
-        playerThree: $('#playerThreeIn').val(),
-        playerFour: $('#playerFourIn').val() 
-      }
-    }
+      guessSet: {[
+        {name: 'playerOne', number: $('#playerOneIn').val()},
+        {name: 'playerTwo', number: $('#playerTwoIn').val()},
+        {name: 'playerThree', number: $('#playerThreeIn').val()},
+        {name: 'playerFour', number: $('#playerFourIn').val()} 
+      ]}
+    } 
   })
   .then(function(response){
     // we may want to add the print to DOM function in here?
