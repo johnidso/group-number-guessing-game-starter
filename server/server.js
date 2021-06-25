@@ -77,8 +77,22 @@ function isNumberCorrect(number) {
     }
 }
 
+let playerOneArray=[];
+let playerTwoArray=[];
+let playerThreeArray=[];
+let playerFourArray=[];
 
 // start the server
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
 })
+
+
+app.post('/submit', function(req, res){
+  let guessSet = req.body.guessSet;
+  playerOneArray.push(guessSet.playerOne.number); 
+  playerTwoArray.push(guessSet.playerTwo.number); 
+  playerThreeArray.push(guessSet.playerThree.number); 
+  playerFourArray.push(guessSet.playerFour.number);  
+}); // keep in mind that these will be ending up as strings
+
