@@ -7,10 +7,35 @@
   <title>Guess A Number!</title>
   <script src="vendors/jquery.min.js"></script>
   <script src="scripts/client.js"></script>
+  <script src="scripts/playerGuessCounter.js"></script>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <h1>YOUR GAME HERE!</h1>
+    <form>
+      <label for="playerOneIn">First Player Guess:<br> <!--Added labels for accessibility-->
+        <input id="playerOneIn" type="text" minlength="1" maxlength="2" class="form-input"/>
+      </label>
+      <br>
+      <label for="playerTwoIn">Second Player Guess:<br>
+        <input id="playerTwoIn" type="text" minlength="1" maxlength="2" class="form-input"/>
+      </label>
+      <br>
+      <label for="playerThreeIn">Third Player Guess:<br>
+        <input id="playerThreeIn" type="text" minlength="1" maxlength="2" class="form-input"/>
+      </label>
+      <br>
+      <label for="playerFourIn">Fourth Player Guess:<br>
+        <input id="playerFourIn" type="text" minlength="1" maxlength="2" class="form-input"/>
+      </label>
+      <br>
+      <button type="button" class="button" id="submitButton">Submit</button>
+      <button type="button" class="button" id="resetButton">Reset</button>
+      <h5>Total Number of Guesses:<span id = "totalGuesses"></span></h5>
+  </form>
+  <div class = "display">
+
+  </div>
 </body>
 </html>
