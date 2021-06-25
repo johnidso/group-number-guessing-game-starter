@@ -10,9 +10,72 @@ app.use(express.urlencoded({extended:true}))
 // Serve up static files (HTML, CSS, Client JS)
 app.use(express.static('server/public'));
 app.use(express.json());
+
+
 // GET & POST Routes go here
+// listen for POST requests to /submit, these are the player guesses
+app.post('/submit', (req, res) => {
+  console.log('The player guesses have been submitted', req.body);
+    // put req.body object into an array
+    let guessSubmission = req.body.guessSet;
+    // loop through guessSubmission object, check answers, push to playerGuesses array
+    checkAnswers(guessSubmission);
+
+  // send a response
+  res.sendStatus(201);
+});
+
+// variable to generate and store random number
+let randomNumber = getRandomNum(1, 25);
+
+// array to store playerGuesses, checked for correctness
+const playerGuesses = [];
 
 
+// Function to loop through an object, check player answers, and push to playerGuesses array
+function checkAnswers(guessObject) {
+    let arrayOfObjects = guessObject.contents;
+    for (let player of arrayOfObjects) {
+      if (isNumberCorrect(player.number)) {
+          playerGuesses.push(
+            {
+                name: player.name,
+                correctAnswer: true
+            }
+          );
+      }
+      else {
+        playerGuesses.push(
+          {
+              name: player.name,
+              correctAnswer: false
+          }
+        );
+      }
+    }
+}
+
+// Function to generate a random number between 1 and 25
+// code courtesy of Mozilla documentation
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomNum(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
+// Function checks if guess matches number (return: true), or does not match (return: false)
+function isNumberCorrect(number) {
+    if (number == randomNumber) {
+      return true;
+    }
+    else {
+      return false;
+    }
+}
+
+
+// start the server
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
 })
