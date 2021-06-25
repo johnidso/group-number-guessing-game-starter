@@ -21,6 +21,10 @@ app.post('/submit', (req, res) => {
     // loop through guessSubmission object, check answers, push to playerAnswers array
     checkAnswers(guessSubmission);
 
+app.post('/new', (req,res) => {
+  // function to create a new random number, assign this to the response
+});
+
   // send a response
   res.sendStatus(201);
 });

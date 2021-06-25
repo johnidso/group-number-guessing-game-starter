@@ -4,6 +4,7 @@ function handleReady() {
   console.log("jquery is loaded!")
   $('#submitButton').on("click", submitGuesses());
   $('#submitButton').on("click", clearInputs());
+  $('#resetButton').on("click", newNumber());
 }
 
 function clearInputs(){
@@ -29,6 +30,19 @@ function submitGuesses(){
   .then(function(response){
     // we may want to add the print to DOM function in here?
     // as for my tasks, I don't think there's anything for me to do here -JI
+  })
+  .catch(function(error){
+    alert('request failed');
+  });
+}
+
+function newNumber(){
+  $.ajax({
+    method: 'POST',
+    url: '/new',
+  })
+  .then(function(response){
+    // function here to append new number to DOM
   })
   .catch(function(error){
     alert('request failed');
