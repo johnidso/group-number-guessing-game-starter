@@ -43,22 +43,12 @@ const playerAnswers= [];
 function checkAnswers(guessObject) {
     let arrayOfObjects = guessObject.contents;
     for (let player of arrayOfObjects) {
-      if (isNumberCorrect(player.number)) {
-          playerAnswers.push(
-            {
-                name: player.name,
-                correctAnswer: true
-            }
-          );
-      }
-      else {
-        playerAnswers.push(
-          {
-              name: player.name,
-              correctAnswer: false
-          }
-        );
-      }
+      let playerAnswer = isNumberCorrect(player.number);
+      playerAnswers.push({
+            name: player.name,
+            number: player.number,
+            answer: playerAnswer
+        });
     }
 }
 
@@ -74,10 +64,16 @@ function getRandomNum(min, max) {
 // Function checks if guess matches number (return: true), or does not match (return: false)
 function isNumberCorrect(number) {
     if (number == randomNumber) {
-      return true;
+      return 'correct!';
+    }
+    else if (number < randomNumber) {
+      return 'Too low!';
+    }
+    else if (number > randomNumber) {
+      return 'Too high!';
     }
     else {
-      return false;
+      console.log('unable to evaluate answers');
     }
 }
 
