@@ -18,26 +18,33 @@ app.post('/submit', (req, res) => {
   console.log('The player guesses have been submitted', req.body);
     // put req.body object into an array
     let guessSubmission = req.body.guessSet;
-    // loop through guessSubmission object, check answers, push to playerGuesses array
+    // loop through guessSubmission object, check answers, push to playerAnswers array
     checkAnswers(guessSubmission);
 
   // send a response
   res.sendStatus(201);
 });
 
+// Listen for GET requests to /answers, these are the answers to the player query
+app.get('/answers', (req, res) => {
+  res.send(playerAnswers);
+  console.log('sending answers (GET)');
+});
+
+
 // variable to generate and store random number
 let randomNumber = getRandomNum(1, 25);
 
-// array to store playerGuesses, checked for correctness
-const playerGuesses = [];
+// array to store playerAnswers, checked for correctness
+const playerAnswers= [];
 
 
-// Function to loop through an object, check player answers, and push to playerGuesses array
+// Function to loop through an object, check player answers, and push to playerAnswers array
 function checkAnswers(guessObject) {
     let arrayOfObjects = guessObject.contents;
     for (let player of arrayOfObjects) {
       if (isNumberCorrect(player.number)) {
-          playerGuesses.push(
+          playerAnswers.push(
             {
                 name: player.name,
                 correctAnswer: true
@@ -45,7 +52,7 @@ function checkAnswers(guessObject) {
           );
       }
       else {
-        playerGuesses.push(
+        playerAnswers.push(
           {
               name: player.name,
               correctAnswer: false
